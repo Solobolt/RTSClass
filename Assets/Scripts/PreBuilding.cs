@@ -2,13 +2,16 @@
 using System.Collections;
 
 public class PreBuilding : MonoBehaviour {
+    Transform myTransform;
 
 	SelectionMovement selection;
 
 	private bool placed = false;
+    public GameObject towerToPlace;
 
 	// Use this for initialization
 	void Start () {
+        myTransform = this.transform;
 		selection = GameObject.FindGameObjectWithTag ("GameController").GetComponent<SelectionMovement>();
 	}
 	
@@ -25,7 +28,9 @@ public class PreBuilding : MonoBehaviour {
 		if(Input.GetMouseButton (0))
 		{
 			selection.placingBuilding = false;
-			placed = true;
+            placed = true;
+            Instantiate(towerToPlace,myTransform.position,myTransform.rotation);
+            Destroy(this.gameObject);
 		}
 	}
 }

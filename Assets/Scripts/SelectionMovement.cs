@@ -8,6 +8,7 @@ public class SelectionMovement : MonoBehaviour {
 	//building placement
 	public bool placingBuilding = false;
 	public GameObject preBuilding;
+    public GameObject finalObject;
 
 	//mouse clicking 
 	public Vector3 mousePosition;
@@ -38,7 +39,7 @@ public class SelectionMovement : MonoBehaviour {
 		if(Input.GetMouseButton (0))
 		{
 			//if targeted object is tagged as player, make it selected object
-			if(hit.transform.tag=="Player")
+			if(hit.transform.tag=="Player" && placingBuilding == false)
 			{
 				selectedUnit = hit.transform.gameObject;
 			}
@@ -62,7 +63,13 @@ public class SelectionMovement : MonoBehaviour {
 		{
 			placingBuilding = true;
 			selectedUnit = null;
-			Instantiate (preBuilding,mousePosition,hit.transform.rotation);
+			GameObject PreTower = Instantiate (preBuilding,mousePosition,hit.transform.rotation) as GameObject;
+
+            if(finalObject != null)
+            {
+                PreTower.GetComponent<Transform>().localScale = finalObject.GetComponent<Transform>().localScale;
+                PreTower.GetComponent<PreBuilding>().towerToPlace = finalObject;
+            }
 		}
 	}
 
