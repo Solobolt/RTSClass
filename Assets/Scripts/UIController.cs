@@ -3,10 +3,12 @@ using System.Collections;
 
 public class UIController : MonoBehaviour {    
     private SelectionMovement selectionMovement;
+    private GameController gameController;
     public GameObject[] towers;
 
     // Use this for initialization
     void Start () {
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         selectionMovement = GameObject.FindGameObjectWithTag("GameController").GetComponent<SelectionMovement>();
 	}
 	
@@ -17,10 +19,18 @@ public class UIController : MonoBehaviour {
 
     //creates a selected tower
     public void Tower(int towerNumb)
-    {
+    { 
+
         if(towerNumb < towers.Length)
         {
-            selectionMovement.CreateTower(towers[towerNumb]);
+            if(towers[towerNumb].GetComponent<Tower>().cost <= gameController.UIGold)
+            {
+                selectionMovement.CreateTower(towers[towerNumb]);
+            }
+            else
+            {
+                print("Not Enough Gold");
+            }
         }
         else
         {

@@ -111,7 +111,7 @@ public class SelectionMovement : MonoBehaviour {
             {
                 PreTower.GetComponent<Transform>().localScale = finalObject.GetComponent<Transform>().localScale;
                 PreTower.GetComponent<PreBuilding>().towerToPlace = finalObject;
-            }
+            } 
         }
     }
 

@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class PreBuilding : MonoBehaviour {
+    private GameController gameController;
+
     Transform myTransform;
     Renderer myRenderer;
 
@@ -18,7 +20,8 @@ public class PreBuilding : MonoBehaviour {
 	void Start () {
         myTransform = this.transform;
         myRenderer = this.GetComponent<Renderer>();
-		selection = GameObject.FindGameObjectWithTag ("GameController").GetComponent<SelectionMovement>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        selection = GameObject.FindGameObjectWithTag ("GameController").GetComponent<SelectionMovement>();
 	}
 	
 	// Update is called once per frame
