@@ -91,14 +91,15 @@ public class SelectionMovement : MonoBehaviour {
 
         if(Input.GetKeyDown("f"))
         {
-            CreateTower();
+            CreateTower(finalObject);
         }
 		
 	}
 
     //Creates a pre tower and then places down a tower when clicked
-    void CreateTower()
+    public void CreateTower(GameObject tower)
     {
+        finalObject = tower;
         //placing pre building
         if (placingBuilding == false)
         {
