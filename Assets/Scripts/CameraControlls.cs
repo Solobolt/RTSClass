@@ -26,19 +26,19 @@ public class CameraControlls : MonoBehaviour {
 	//handles camera edge movement
 	void mouseEdge()
 	{
-		if(Input.mousePosition.x >= Screen.width * 0.95f)
+		if(Input.mousePosition.x >= Screen.width  - 25)
 		{
 			myTransform.position += Vector3.right * moveSpeed * Time.deltaTime;
 		}
-		if(Input.mousePosition.x <= Screen.width * 0.05f)
+		if(Input.mousePosition.x <= 25)
 		{
 			myTransform.position += Vector3.left * moveSpeed * Time.deltaTime;
 		}
-		if(Input.mousePosition.y >= Screen.height * 0.95f)
+		if(Input.mousePosition.y >= Screen.height - 25)
 		{
 			myTransform.position += Vector3.forward * moveSpeed * Time.deltaTime;
 		}
-		if(Input.mousePosition.y <= Screen.height * 0.05f)
+		if(Input.mousePosition.y <= 25)
 		{
 			myTransform.position += Vector3.back * moveSpeed * Time.deltaTime;
 		}

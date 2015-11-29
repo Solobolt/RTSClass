@@ -47,6 +47,13 @@ public class PreBuilding : MonoBehaviour {
             }
 		}
 
+        if(Input.GetKeyDown("escape"))
+        {
+            selection.placingBuilding = false;
+            placed = true;
+            Destroy(this.gameObject);
+        }
+
         ChangeRenderer();
 	}
 

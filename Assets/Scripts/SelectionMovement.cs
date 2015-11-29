@@ -88,11 +88,6 @@ public class SelectionMovement : MonoBehaviour {
 			selectedUnit.GetComponent<PlayerUnit>().Move (mousePosition);
 
 		}
-
-        if(Input.GetKeyDown("f"))
-        {
-            CreateTower(finalObject);
-        }
 		
 	}
 
