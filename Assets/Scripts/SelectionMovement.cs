@@ -30,7 +30,6 @@ public class SelectionMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		locateMouse ();
-        CreateTower();
 	}
 
 	//locates the mouse pointer in the world
@@ -90,7 +89,10 @@ public class SelectionMovement : MonoBehaviour {
 
 		}
 
-
+        if(Input.GetKeyDown("f"))
+        {
+            CreateTower();
+        }
 		
 	}
 
@@ -98,7 +100,7 @@ public class SelectionMovement : MonoBehaviour {
     void CreateTower()
     {
         //placing pre building
-        if (Input.GetKeyDown("f") && placingBuilding == false)
+        if (placingBuilding == false)
         {
             placingBuilding = true;
             selectedUnit = null;
