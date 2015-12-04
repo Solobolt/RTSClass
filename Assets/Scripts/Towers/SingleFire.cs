@@ -7,7 +7,7 @@ public class SingleFire : Tower {
 
     private Transform myTransform;
     public GameObject projectile;
-    private float fireRate = 2.0f;
+    private float fireRate = 1.0f;
     private float fireTime;
     private float range = 10.0f;
 

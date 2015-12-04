@@ -9,8 +9,8 @@ public abstract class Enemy : MonoBehaviour {
     //public GameObject[] travelPoints;
     private GameObject endPosition;
 
-    private Transform myTransform;
-    private GameController gameController;
+    public Transform myTransform;
+    public GameController gameController;
 
     //A* Navigation
     private NavMeshAgent agent;
@@ -54,6 +54,10 @@ public abstract class Enemy : MonoBehaviour {
         {
             gameController.enemies.Remove(this.gameObject);
             Destroy(this.gameObject);
+            splitUp();
         }
     }
+
+    //what happens on death
+    public abstract void splitUp();
 }

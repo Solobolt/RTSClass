@@ -6,10 +6,19 @@ public class EnemySpawner : MonoBehaviour {
     private float gameTimer = 0;
 
     private float spawnTimer;
-    private int waveNumber = 0;
-    public float spawnRate = 5.0f;
+    public float spawnRate = 1.0f;
+    private float waveDelay = 10.0f;
+
+    private int waveNumber = 1;
+
+    private int gruntNum = 5;
+    private int wagonNum = 0;
+    private int tankNum = 0;
 
     public GameObject EnemyGrunt;
+    public GameObject EnemyWagon;
+
+
     public GameObject startPostion;
 
 	// Use this for initialization
@@ -21,25 +30,80 @@ public class EnemySpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        WaveTimer();
+        waveDelay -= Time.deltaTime;
 
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnRate)
+        if(waveDelay <= 0)
         {
-            spawnEnemy();
-            spawnTimer = 0;
+            waveDelay = 0;
+            spawnTimer += Time.deltaTime;
+            SpawnEnemy();
         }
         
-	}
 
-    //Creates a set of enemies set to the timer
-    void spawnEnemy()
-    {
-        Instantiate(EnemyGrunt,startPostion.transform.position,startPostion.transform.rotation);
     }
 
-    void WaveTimer()
+    //handles how long the game has been going
+    void WaveCheck()
     {
-        gameTimer += Time.deltaTime;
+        switch (waveNumber)
+        {
+            case 1:
+                SetEnemyNumbers(5, 0, 0);
+                break;
+
+            case 2:
+                SetEnemyNumbers(10, 1, 0);
+                break;
+
+            case 3:
+                SetEnemyNumbers(1, 5, 0);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    void SetEnemyNumbers(int grunts,int wagons, int tanks)
+    {
+        gruntNum = grunts;
+        wagonNum = wagons;
+        tankNum = tanks;
+    }
+
+    //Creates a set of enemies set to the timer
+    void SpawnEnemy()
+    {
+        if (spawnTimer >= spawnRate)
+        {
+            if (gruntNum != 0)
+            {
+                Instantiate(EnemyGrunt, startPostion.transform.position, startPostion.transform.rotation);
+                gruntNum--;
+            }
+            else
+            {
+                if (wagonNum != 0)
+                {
+                    Instantiate(EnemyWagon, startPostion.transform.position, startPostion.transform.rotation);
+                    wagonNum--;
+                }
+                else
+                {
+                    if (tankNum != 0)
+                    {
+                        //Instantiate(EnemyTank, startPostion.transform.position, startPostion.transform.rotation);
+                        tankNum--;
+                    }
+                    else
+                    {
+                        waveNumber++;
+                        WaveCheck();
+                        waveDelay = 10.0f;
+                    }
+                }
+            }
+            spawnTimer = 0;
+        }
     }
 }
