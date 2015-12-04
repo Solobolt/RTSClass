@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
@@ -15,9 +16,10 @@ public class GameController : MonoBehaviour {
     private float timer;
 
     public int enemyCount = 0;
+    public List<GameObject> enemies;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         gold += startingGoldAmount;
 	}
 	
@@ -55,5 +57,11 @@ public class GameController : MonoBehaviour {
     {
         gold += amount;
         UIGold = gold;
+    }
+
+    //Adds an enemy to the lists in game controller
+    public void addEnemy(Enemy _Enemy)
+    {
+        
     }
 }

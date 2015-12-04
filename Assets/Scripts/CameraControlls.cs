@@ -8,9 +8,11 @@ public class CameraControlls : MonoBehaviour {
 
 	private float moveSpeed = 25.0f;
 	private float dragSpeed = 100.0f;
-	private float maxZoom = 200.0f;
-	private float minZoom = 20.0f;
+	public float maxZoom = 200.0f;
+	public float minZoom = 20.0f;
 	private float scrollSpeed = 1000.0f;
+
+    private float boarderLimits = 25;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +23,7 @@ public class CameraControlls : MonoBehaviour {
 	void Update () {
 		scrollZoom ();
 		mouseMovent ();
+        LockBoarders();
 	}
 
 	//handles camera edge movement
@@ -43,6 +46,34 @@ public class CameraControlls : MonoBehaviour {
 			myTransform.position += Vector3.back * moveSpeed * Time.deltaTime;
 		}
 	}
+
+
+    //Stops the camera from being able to travel too far away from the game scene
+    void LockBoarders()
+    {
+        Vector3 currentPos = myTransform.position;
+        if(currentPos.x > boarderLimits)
+        {
+            currentPos.x = boarderLimits;
+        }
+
+        if (currentPos.x < -boarderLimits)
+        {
+            currentPos.x = -boarderLimits;
+        }
+
+        if (currentPos.z > boarderLimits)
+        {
+            currentPos.z = boarderLimits;
+        }
+
+        if (currentPos.z < -boarderLimits)
+        {
+            currentPos.z = -boarderLimits;
+        }
+
+        myTransform.position = currentPos;
+    }
 
 	//hold move
 	void mouseMovent()

@@ -9,7 +9,8 @@ public class CameraController : MonoBehaviour {
 
 	//Mouse zoom
 	public float cameraHeight = 10.0f;
-	public GameObject camera;
+	public GameObject playerCamera ;
+
 
 	// Use this for initialization
 	void Start () {
@@ -28,18 +29,18 @@ public class CameraController : MonoBehaviour {
 
 		//Move camera focus and height based on raycast from maincamera
 		RaycastHit hit;
-		Vector3 direction = (transform.position - camera.transform.position).normalized;
+		Vector3 direction = (transform.position - playerCamera.transform.position).normalized;
 
-		if (Physics.Raycast (camera.transform.position, direction, out hit, 1000.0f)) {
+		if (Physics.Raycast (playerCamera.transform.position, direction, out hit, 1000.0f)) {
 
-			Debug.DrawLine (camera.transform.position, hit.point);
+			Debug.DrawLine (playerCamera.transform.position, hit.point);
 
 			//Adjust height of the cameraHeight based on difference from focus point
-			if (Vector3.Distance (transform.position, camera.transform.position) 
+			if (Vector3.Distance (transform.position, playerCamera.transform.position) 
 				!= cameraHeight && hit.transform.tag == "Ground") {
-				Vector3 newPos = camera.transform.position;
+				Vector3 newPos = playerCamera.transform.position;
 				newPos.y = hit.point.y + cameraHeight;
-				camera.transform.position = newPos;
+				playerCamera.transform.position = newPos;
 			}
 		}
 
