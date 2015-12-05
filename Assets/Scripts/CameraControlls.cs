@@ -12,7 +12,7 @@ public class CameraControlls : MonoBehaviour {
 	public float minZoom = 20.0f;
 	private float scrollSpeed = 1000.0f;
 
-    private float boarderLimits = 25;
+    private float boarderLimits = 15;
 
 	// Use this for initialization
 	void Start () {
@@ -62,14 +62,14 @@ public class CameraControlls : MonoBehaviour {
             currentPos.x = -boarderLimits;
         }
 
-        if (currentPos.z > boarderLimits)
+        if (currentPos.z > boarderLimits - 5)
         {
-            currentPos.z = boarderLimits;
+            currentPos.z = boarderLimits - 5;
         }
 
-        if (currentPos.z < -boarderLimits)
+        if (currentPos.z < -boarderLimits - 5)
         {
-            currentPos.z = -boarderLimits;
+            currentPos.z = -boarderLimits - 5;
         }
 
         myTransform.position = currentPos;

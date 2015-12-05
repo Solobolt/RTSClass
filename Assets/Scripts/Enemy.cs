@@ -14,7 +14,7 @@ public abstract class Enemy : MonoBehaviour {
 
     //A* Navigation
     private NavMeshAgent agent;
-    private int moveSpeed;
+    private float moveSpeed = 100;
     private Vector3 movePostion;
 
     // Use this for initialization
@@ -38,6 +38,14 @@ public abstract class Enemy : MonoBehaviour {
         Debug.DrawLine(myTransform.position, movePostion, Color.white);
         //Move(travelPoints[1].transform.position);
         Move(endPosition.transform.position);
+
+        //Checks to see if thr enemy has reached its destination
+        if(Mathf.Floor(myTransform.position.x) + 0.5 == Mathf.Floor( endPosition.transform.position.x ) +0.5 && Mathf.Floor(myTransform.position.z) + 0.5 == Mathf.Floor(endPosition.transform.position.z) + 0.5)
+        {
+            gameController.health -= health;
+            gameController.enemies.Remove(this.gameObject);
+            Destroy(this.gameObject);
+        }
     }
 
     //Changes the units destination

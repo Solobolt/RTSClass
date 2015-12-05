@@ -31,6 +31,31 @@ public class PreBuilding : MonoBehaviour {
 		if(selection.placingBuilding == true && placed == false)
 		{
             Vector3 towerPos = selection.mousePosition;
+
+            //Sets limmits on where the tower can be placed
+            if (towerPos.x > gameController.mapSize/2)
+            {
+                towerPos.x = gameController.mapSize/2;
+            }
+
+            if (towerPos.x < -gameController.mapSize/2)
+            {
+                towerPos.x = -gameController.mapSize/2;
+            }
+
+            if (towerPos.z > gameController.mapSize/2)
+            {
+                towerPos.z = gameController.mapSize/2;
+            }
+
+            if (towerPos.z < -gameController.mapSize/2)
+            {
+                towerPos.z = -gameController.mapSize/2;
+            }
+
+            towerPos.x = Mathf.Floor(towerPos.x) + 0.5f;
+            towerPos.z = Mathf.Floor(towerPos.z) + 0.5f;
+
             towerPos.y = 0.5f * myTransform.localScale.y;
             myTransform.position = towerPos;
 		}
@@ -47,7 +72,7 @@ public class PreBuilding : MonoBehaviour {
             }
 		}
 
-        if(Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown("escape") || Input.GetMouseButtonDown(1))
         {
             selection.placingBuilding = false;
             placed = true;
@@ -72,6 +97,7 @@ public class PreBuilding : MonoBehaviour {
         {
             placeable = false;
         }
+
     }
 
     void OnTriggerExit(Collider otherObject)

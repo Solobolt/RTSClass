@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour {
 
     public GameObject EnemyGrunt;
     public GameObject EnemyWagon;
+    public GameObject EnemyTank;
 
 
     public GameObject startPostion;
@@ -56,7 +57,19 @@ public class EnemySpawner : MonoBehaviour {
                 break;
 
             case 3:
-                SetEnemyNumbers(1, 5, 0);
+                SetEnemyNumbers(5, 2, 0);
+                break;
+
+            case 4:
+                SetEnemyNumbers(10, 4, 0);
+                break;
+
+            case 5:
+                SetEnemyNumbers(5, 6, 0);
+                break;
+
+            case 6:
+                SetEnemyNumbers(10, 0, 1);
                 break;
 
             default:
@@ -92,7 +105,7 @@ public class EnemySpawner : MonoBehaviour {
                 {
                     if (tankNum != 0)
                     {
-                        //Instantiate(EnemyTank, startPostion.transform.position, startPostion.transform.rotation);
+                        Instantiate(EnemyTank, startPostion.transform.position, startPostion.transform.rotation);
                         tankNum--;
                     }
                     else

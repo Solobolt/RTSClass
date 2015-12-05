@@ -4,22 +4,33 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
-    private int health = 100;
+    //sets the players health
+    public int health = 100;
 
+    //Sets the gold values of the player
     private int gold = 0;
     public int gainAmount = 5;
     private int startingGoldAmount = 100;
 
+    //An object that you can refracne without accidently changing the actual gold amount
     public int UIGold;
 
+    //Hold the amount of gold that you recieve every timer tick
     private float gainRate = 1.0f;
     private float timer;
 
+    //number of enemies still in play
     public int enemyCount = 0;
     public List<GameObject> enemies;
 
+    //sets the size of the area that towers can be placed
+    private GameObject map;
+    public float mapSize = 25;
+
     // Use this for initialization
     void Start () {
+        map = GameObject.FindGameObjectWithTag("Map");
+        map.transform.localScale = new Vector3(mapSize,1,mapSize);
         gold += startingGoldAmount;
 	}
 	
@@ -33,6 +44,7 @@ public class GameController : MonoBehaviour {
         if(timer >= gainRate)
         {
             gold += amount;
+            //Updating Ui gold so that gold amount cannot be changed
             UIGold = gold;
             timer = 0;
         }
@@ -59,9 +71,13 @@ public class GameController : MonoBehaviour {
         UIGold = gold;
     }
 
-    //Adds an enemy to the lists in game controller
-    public void addEnemy(Enemy _Enemy)
+    public void RemoveHealth(int amount)
     {
-        
+        health -= amount;
+        if(health < 0)
+        {
+            health = 0;
+            print("YOU LOSE");
+        }
     }
 }

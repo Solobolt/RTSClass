@@ -16,9 +16,6 @@ public class SingleFire : Tower {
     private float currentDistance;
     public GameObject weaponBarrel;
 
-    //private bool enemyDetected = false;
-
-
     public override void StartTowerEffect()
     {
         myTransform = this.transform;
@@ -27,10 +24,13 @@ public class SingleFire : Tower {
     public override void UpdateTowerEffect()
     {
         GetEnemies();
-        if (currentDistance <= range)
+        if (closetsEnemy != null)
         {
-            TargetEnemy();
-            fireProjectile();
+            if (currentDistance <= range)
+            {
+                TargetEnemy();
+                fireProjectile();
+            }
         }
     }
 

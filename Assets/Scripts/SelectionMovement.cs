@@ -104,7 +104,14 @@ public class SelectionMovement : MonoBehaviour {
 
             if (finalObject != null)
             {
-                PreTower.GetComponent<Transform>().localScale = finalObject.GetComponent<Transform>().localScale;
+
+                Vector3 currentScale = finalObject.GetComponent<Transform>().localScale;
+                //resizes the boxes slightly so that towers with an exact dimention of 1 can be placed next to eachother
+                currentScale.x -= 0.01f;
+                currentScale.z -= 0.01f;
+
+                //Sets scale and what tower will be placed
+                PreTower.GetComponent<Transform>().localScale = currentScale;
                 PreTower.GetComponent<PreBuilding>().towerToPlace = finalObject;
             } 
         }
