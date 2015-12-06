@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
     //sets the players health
-    public int health = 100;
+    public float health = 100;
+    private float maxHealth;
+    private float healthRatio;
 
     //Sets the gold values of the player
     private int gold = 0;
@@ -29,6 +31,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        maxHealth = health;
         map = GameObject.FindGameObjectWithTag("Map");
         map.transform.localScale = new Vector3(mapSize,1,mapSize);
         gold += startingGoldAmount;
@@ -36,6 +39,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        healthRatio = health / maxHealth;
         AddGain(gainAmount);
 	}
     //adds gold every second
@@ -79,5 +83,11 @@ public class GameController : MonoBehaviour {
             health = 0;
             print("YOU LOSE");
         }
+    }
+
+    //retrives the health ratio of the player
+    public float GetHealthRatio()
+    {
+        return healthRatio;
     }
 }

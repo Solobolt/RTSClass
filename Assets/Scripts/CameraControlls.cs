@@ -6,6 +6,13 @@ public class CameraControlls : MonoBehaviour {
 	private Transform myTransform;
 	private Vector3 currentPos;
 
+    //holds camera mode variables
+    public Camera playerCamera;
+    private bool inBirdsEye = false;
+    //Holds the size of the orthonographic views
+    private float othroSize = 20;
+
+    //Handles camera movement variables
 	private float moveSpeed = 25.0f;
 	private float dragSpeed = 100.0f;
 	public float maxZoom = 200.0f;
@@ -21,9 +28,16 @@ public class CameraControlls : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		scrollZoom ();
-		mouseMovent ();
-        LockBoarders();
+        if (inBirdsEye == false)
+        {
+            scrollZoom();
+            mouseMovent();
+            LockBoarders();
+        }
+        else
+        {
+
+        }
 	}
 
 	//handles camera edge movement
@@ -107,4 +121,43 @@ public class CameraControlls : MonoBehaviour {
 			myTransform.position = currentPos;
 		}
 	}
+
+    //Sets the camera to orthnonographic view
+    public void toggleBirdsEye()
+    {
+        if(inBirdsEye == true)
+        {
+            inBirdsEye = false;
+        }
+        else
+        {
+            inBirdsEye = true;
+        }
+        setCameraTrans();
+    }
+
+    //sets the cameras tranform
+    void setCameraTrans()
+    {
+        if(inBirdsEye == true)
+        {
+            //Sets the camera position (rotation should always be 0)
+            myTransform.position = new Vector3(0, 10, 0);
+            myTransform.rotation = Quaternion.Euler(0,0,0);
+
+            //sets camera rotation (Position should always be 0)
+            playerCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
+            playerCamera.orthographic = true;
+            playerCamera.orthographicSize = othroSize;
+        }
+        else
+        {
+            myTransform.position = new Vector3(0, 15, 0);
+            myTransform.rotation = Quaternion.Euler(0, 0, 0);
+
+            playerCamera.transform.rotation = Quaternion.Euler(65, 0, 0);
+            playerCamera.orthographic = false;
+        }
+        
+    }
 }

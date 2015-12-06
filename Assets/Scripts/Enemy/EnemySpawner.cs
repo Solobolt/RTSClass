@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour {
 
+    private UIController uiController;
+
     private float gameTimer = 0;
 
     private float spawnTimer;
@@ -10,6 +12,8 @@ public class EnemySpawner : MonoBehaviour {
     private float waveDelay = 10.0f;
 
     private int waveNumber = 1;
+    private bool noMoreWaves = false;
+    public bool freePlayMode = false;
 
     private int gruntNum = 5;
     private int wagonNum = 0;
@@ -25,22 +29,24 @@ public class EnemySpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        uiController = GameObject.FindGameObjectWithTag("UIController").GetComponent<UIController>();
         spawnTimer = spawnRate;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        waveDelay -= Time.deltaTime;
-
-        if(waveDelay <= 0)
+        if(noMoreWaves == false)
         {
-            waveDelay = 0;
-            spawnTimer += Time.deltaTime;
-            SpawnEnemy();
+            waveDelay -= Time.deltaTime;
+            uiController.SetWaveTimer(waveDelay);
+            if (waveDelay <= 0)
+            {
+                waveDelay = 0;
+                spawnTimer += Time.deltaTime;
+                SpawnEnemy();
+            }
         }
-        
-
     }
 
     //handles how long the game has been going
@@ -72,7 +78,21 @@ public class EnemySpawner : MonoBehaviour {
                 SetEnemyNumbers(10, 0, 1);
                 break;
 
+            case 7:
+                SetEnemyNumbers(2, 1, 3);
+                break;
+
             default:
+                if(freePlayMode == false)
+                {
+                    noMoreWaves = true;
+                    print("YOU WIN");
+                }
+                else
+                {
+                    SetEnemyNumbers(1 + waveNumber, waveNumber * 2, waveNumber * 3);
+                }
+                
                 break;
         }
     }
