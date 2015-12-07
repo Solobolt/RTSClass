@@ -9,7 +9,7 @@ public class SingleFire : Tower {
     public GameObject projectile;
     private float fireRate = 1.0f;
     private float fireTime;
-    private float range = 10.0f;
+    private float range = 2.0f;
 
     private GameObject[] enemies;
     private GameObject closetsEnemy;

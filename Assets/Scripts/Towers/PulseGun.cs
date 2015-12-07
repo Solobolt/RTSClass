@@ -8,7 +8,7 @@ public class PulseGun : Tower {
     public GameObject projectile;
     private float fireRate = 1.0f;
     private float fireTime;
-    private float range = 5.0f;
+    private float range = 3.0f;
     
     //holds the objects that determain the direction that the projectiles are fired
     public GameObject[] weaponBarrel;
