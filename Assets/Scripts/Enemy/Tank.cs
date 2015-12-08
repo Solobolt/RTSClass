@@ -5,7 +5,7 @@ using System;
 public class Tank : Enemy {
 
     public GameObject wagon;
-    private int goldWorth = 50;
+    private int goldWorth = 10;
     private int spawnNum = 4;
 
     public override void splitUp()

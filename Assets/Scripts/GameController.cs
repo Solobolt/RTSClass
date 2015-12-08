@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		Time.timeScale = 1;
         maxHealth = health;
         map = GameObject.FindGameObjectWithTag("Map");
         map.transform.localScale = new Vector3(mapSize,1,mapSize);

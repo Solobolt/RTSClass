@@ -18,10 +18,12 @@ public class EnemySpawner : MonoBehaviour {
     private int gruntNum = 5;
     private int wagonNum = 0;
     private int tankNum = 0;
+	private int assaultNum= 0;
 
     public GameObject EnemyGrunt;
     public GameObject EnemyWagon;
     public GameObject EnemyTank;
+	public GameObject EnemyAssault;
 
 
     public GameObject startPostion;
@@ -55,31 +57,31 @@ public class EnemySpawner : MonoBehaviour {
         switch (waveNumber)
         {
             case 1:
-                SetEnemyNumbers(5, 0, 0);
+                SetEnemyNumbers(5, 0, 0, 0);
                 break;
 
             case 2:
-                SetEnemyNumbers(10, 1, 0);
+                SetEnemyNumbers(10, 1, 0, 0);
                 break;
 
             case 3:
-                SetEnemyNumbers(5, 2, 0);
+                SetEnemyNumbers(5, 2, 0, 0);
                 break;
 
             case 4:
-                SetEnemyNumbers(10, 4, 0);
+                SetEnemyNumbers(10, 4, 0, 0);
                 break;
 
             case 5:
-                SetEnemyNumbers(5, 6, 0);
+                SetEnemyNumbers(5, 6, 0, 0);
                 break;
 
             case 6:
-                SetEnemyNumbers(10, 0, 1);
+                SetEnemyNumbers(10, 0, 1, 0);
                 break;
 
             case 7:
-                SetEnemyNumbers(2, 1, 3);
+                SetEnemyNumbers(2, 1, 3, 1);
                 break;
 
             default:
@@ -90,18 +92,19 @@ public class EnemySpawner : MonoBehaviour {
                 }
                 else
                 {
-                    SetEnemyNumbers(1 + waveNumber, waveNumber * 2, waveNumber * 3);
+                    SetEnemyNumbers(1 + waveNumber, waveNumber * 2, waveNumber * 3,waveNumber);
                 }
                 
                 break;
         }
     }
 
-    void SetEnemyNumbers(int grunts,int wagons, int tanks)
+    void SetEnemyNumbers(int grunts,int wagons, int tanks, int assualts)
     {
         gruntNum = grunts;
         wagonNum = wagons;
         tankNum = tanks;
+		assaultNum = assualts;
     }
 
     //Creates a set of enemies set to the timer
@@ -130,9 +133,17 @@ public class EnemySpawner : MonoBehaviour {
                     }
                     else
                     {
-                        waveNumber++;
-                        WaveCheck();
-                        waveDelay = 10.0f;
+						if(assaultNum != 0)
+						{
+							Instantiate(EnemyAssault, startPostion.transform.position, startPostion.transform.rotation);
+							assaultNum--;
+						}
+						else
+						{
+	                        waveNumber++;
+	                        WaveCheck();
+	                        waveDelay = 10.0f;
+						}
                     }
                 }
             }
