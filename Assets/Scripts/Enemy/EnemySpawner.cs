@@ -108,6 +108,7 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     //Creates a set of enemies set to the timer
+	//8/12/2015 - Most effeicient Method found at this time. Daniel not able to find other method at this time either
     void SpawnEnemy()
     {
         if (spawnTimer >= spawnRate)

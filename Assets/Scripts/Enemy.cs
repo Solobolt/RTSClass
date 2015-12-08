@@ -46,6 +46,8 @@ public abstract class Enemy : MonoBehaviour {
             gameController.enemies.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
+
+		HealthCheck ();
     }
 
     //Changes the units destination
@@ -58,13 +60,17 @@ public abstract class Enemy : MonoBehaviour {
     public void RemoveHealth(int amount)
     {
         health -= amount;
-        if(health <= 0)
-        {
-            gameController.enemies.Remove(this.gameObject);
-            Destroy(this.gameObject);
-            splitUp();
-        }
     }
+
+	void HealthCheck()
+	{
+		if(health <= 0)
+		{
+			gameController.enemies.Remove(this.gameObject);
+			Destroy(this.gameObject);
+			splitUp();
+		}
+	}
 
     //what happens on death
     public abstract void splitUp();
