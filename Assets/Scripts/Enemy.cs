@@ -42,7 +42,7 @@ public abstract class Enemy : MonoBehaviour {
         //Checks to see if thr enemy has reached its destination
         if(Mathf.Floor(myTransform.position.x) + 0.5 == Mathf.Floor( endPosition.transform.position.x ) +0.5 && Mathf.Floor(myTransform.position.z) + 0.5 == Mathf.Floor(endPosition.transform.position.z) + 0.5)
         {
-            gameController.health -= health;
+            gameController.health -= health * 3;
             gameController.enemies.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
