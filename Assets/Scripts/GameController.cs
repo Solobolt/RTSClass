@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
+    //holds the UI prefab that is called When you die
+    public GameObject gameOverScreen;
+
     //sets the players health
     public float health = 100;
     private float maxHealth;
@@ -42,6 +45,8 @@ public class GameController : MonoBehaviour {
 	void Update () {
         healthRatio = health / maxHealth;
         AddGain(gainAmount);
+        Cheat();
+        RemoveHealth(0);
 	}
     //adds gold every second
     public void AddGain(int amount)
@@ -76,13 +81,15 @@ public class GameController : MonoBehaviour {
         UIGold = gold;
     }
 
+    //Handles damage done to the player
     public void RemoveHealth(int amount)
     {
         health -= amount;
         if(health < 0)
         {
             health = 0;
-            print("YOU LOSE");
+            Time.timeScale = 0;
+            Instantiate(gameOverScreen);
         }
     }
 
@@ -90,5 +97,15 @@ public class GameController : MonoBehaviour {
     public float GetHealthRatio()
     {
         return healthRatio;
+    }
+
+    //Allows a developer to increase thier gold amoun for testing
+    void Cheat()
+    {
+        if(Input.GetKey("p") && Input.GetKey("l") && Input.GetKey("h"))
+        {
+            AddGold(500);
+        }
+
     }
 }

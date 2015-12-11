@@ -8,12 +8,13 @@ public class Tank : Enemy {
     private int goldWorth = 10;
     private int spawnNum = 3;
 
+    //If the enemy dies it breaks up into bits
     public override void splitUp()
     {
         for (int i = 0; i < spawnNum; i++)
         {
-            gameController.AddGold(goldWorth);
             Instantiate(wagon, myTransform.position, myTransform.rotation);
         }
+        gameController.AddGold(goldWorth);
     }
 }

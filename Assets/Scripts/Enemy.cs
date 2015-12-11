@@ -62,6 +62,7 @@ public abstract class Enemy : MonoBehaviour {
         health -= amount;
     }
 
+    //Checks if the character is dead and destroyes the gameobject if it is
 	void HealthCheck()
 	{
 		if(health <= 0)

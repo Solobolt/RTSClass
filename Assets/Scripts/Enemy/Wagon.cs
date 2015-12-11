@@ -7,13 +7,13 @@ public class Wagon : Enemy {
     private int goldWorth = 5;
     private int spawnNum = 2;
 
+    //If the enemy dies it breaks up into bits
     public override void splitUp()
     {
         for (int i = 0; i < spawnNum; i++)
         {
-            gameController.AddGold(goldWorth);
             Instantiate(grunt, myTransform.position, myTransform.rotation);
         }
-        
+        gameController.AddGold(goldWorth);
     }
 }

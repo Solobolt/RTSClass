@@ -53,6 +53,7 @@ public class PreBuilding : MonoBehaviour {
                 towerPos.z = -gameController.mapSize/2;
             }
 
+            //Sets the grid values
             towerPos.x = Mathf.Floor(towerPos.x) + 0.5f;
             towerPos.z = Mathf.Floor(towerPos.z) + 0.5f;
 
@@ -72,6 +73,7 @@ public class PreBuilding : MonoBehaviour {
             }
 		}
 
+        //removes the prebuilding if the player accidently selected the wrong tower
         if (Input.GetKeyDown("escape") || Input.GetMouseButtonDown(1))
         {
             selection.placingBuilding = false;

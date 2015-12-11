@@ -16,11 +16,13 @@ public class SingleFire : Tower {
     private float currentDistance;
     public GameObject weaponBarrel;
 
+    //calls on tower start
     public override void StartTowerEffect()
     {
         myTransform = this.transform;
     }
 
+    //calls on the tower udate
     public override void UpdateTowerEffect()
     {
         GetEnemies();
@@ -59,6 +61,7 @@ public class SingleFire : Tower {
         }
     }
 
+    //Fires the weapon
     void fireProjectile()
     {
         if(fireTime>= fireRate)

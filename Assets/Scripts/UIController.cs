@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour {
     public GameObject[] towers;
     public Text uiGold;
     public Text uiWaveTimer;
+    private bool fastForward = false;
 
     public Slider uiHealthSlider;
 
@@ -49,6 +50,24 @@ public class UIController : MonoBehaviour {
         {
             uiWaveTimer.text = "";
             uiWaveTimer.enabled = false;
+        }
+    }
+
+    //Fast Forward toggle
+    public void toggleFastForward()
+    {
+        if(fastForward == false)
+        {
+            fastForward = true;
+            Time.timeScale = 5;
+        }
+        else
+        {
+            if (fastForward == true)
+            {
+                fastForward = false;
+                Time.timeScale = 1;
+            }
         }
     }
 
